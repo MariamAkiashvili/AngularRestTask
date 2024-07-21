@@ -2,8 +2,6 @@ package com.epam.upskill.calculator.models;
 
 import java.math.BigDecimal;
 
-import org.springframework.http.HttpStatus;
-
 public class Result {
 
 	//Message of the result (error message, or simply the result of fibonacci calculation)

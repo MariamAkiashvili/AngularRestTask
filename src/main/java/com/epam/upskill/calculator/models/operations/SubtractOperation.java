@@ -8,8 +8,12 @@ public class SubtractOperation extends OperationAbstract {
 
 	@Override
 	public Result perform() throws Exception {
-		Result result = new Result();
+		Result result = operandsValidator();
 		result.setResult(BigDecimal.ZERO);
+		if(!result.getError()){
+			result.setResult(operand1.subtract(operand2));
+			result.setError(Boolean.FALSE);
+		}
 		return result;
 	}
 	

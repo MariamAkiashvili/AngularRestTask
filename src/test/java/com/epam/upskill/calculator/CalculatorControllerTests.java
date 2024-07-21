@@ -1,7 +1,5 @@
 package com.epam.upskill.calculator;
 
-import static org.junit.Assert.assertEquals;
-
 import com.epam.upskill.calculator.controllers.CalculatorController;
 import com.epam.upskill.calculator.util.Constants;
 import org.junit.Test;
@@ -16,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CalculatorController.class)
@@ -86,12 +86,185 @@ public class CalculatorControllerTests {
 	
 	@Test
 	public void divideZeroOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 10, \"operand2\": 0}";
 
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: Can't divide by zero\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
 	}
 	
 	@Test
 	public void negativeDivisionOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 5, \"operand2\": -1}";
 
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":-5.0000000000}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
 	}
 
+
+	@Test
+	public void SubtractPositiveOperatorTes() throws Exception {
+		String jsonBody = "{\"operand1\": 10, \"operand2\": 5}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":5}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void SubtratcNegativeOperatorTest() throws Exception {
+		String jsonBody = "{\"operand1\": 5, \"operand2\": -1}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":6}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void SubtractZeroOperatorTes() throws Exception {
+		String jsonBody = "{\"operand1\": 10, \"operand2\": 0}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":10}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void MultiplyOneNegativeOperatorTest() throws Exception {
+		String jsonBody = "{\"operand1\": 5, \"operand2\": -1}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":-5}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void MultiplyTwoNegativeOperatorTes() throws Exception {
+		String jsonBody = "{\"operand1\": -10, \"operand2\": -5}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":50}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void MultiplyByZeroTest() throws Exception {
+		String jsonBody = "{\"operand1\": 5, \"operand2\": 0}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":0}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+	@Test
+	public void MultiplyByPositiveOperatorsTest() throws Exception {
+		String jsonBody = "{\"operand1\": 5, \"operand2\": 11}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":55}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void MultiplyNullValueOperatorTest() throws Exception{
+
+		String jsonBody = "{\"operand1\": 20, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+
+	}
 }
+
+
