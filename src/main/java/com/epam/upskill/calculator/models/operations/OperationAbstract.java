@@ -14,10 +14,16 @@ public abstract class OperationAbstract implements OperationInterface {
 	protected BigDecimal operand1;
 	protected BigDecimal operand2;
 
+	public void setOperand1(BigDecimal operand1) {
+		this.operand1 = operand1;
+	}
 	public BigDecimal getOperand1() {
 		return operand1;
 	}
 
+	public void setOperand2(BigDecimal operand2) {
+		this.operand2 = operand2;
+	}
 	public BigDecimal getOperand2() {
 		return operand2;
 	}
@@ -30,7 +36,7 @@ public abstract class OperationAbstract implements OperationInterface {
 		return message + " operation [getOperand1()=" + getOperand1() + ", getOperand2()=" + getOperand2() + "]";
 	}
 
-	Result operandsValidator() {
+	public Result operandsValidator() {
 		Result result = new Result();
 		if (this.operand1 == null || this.operand2 == null){
 			result.setError(Boolean.TRUE);
