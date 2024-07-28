@@ -1,12 +1,12 @@
 package com.epam.upskill.calculator.models.operations;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import com.epam.upskill.calculator.exceptionHandler.IllegalArgument;
 import com.epam.upskill.calculator.exceptionHandler.NullArgument;
 import com.epam.upskill.calculator.models.Result;
 import com.epam.upskill.calculator.util.Constants;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class DivideOperation extends OperationAbstract {
 	
