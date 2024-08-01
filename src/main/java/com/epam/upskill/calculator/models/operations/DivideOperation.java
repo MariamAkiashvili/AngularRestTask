@@ -1,7 +1,6 @@
 package com.epam.upskill.calculator.models.operations;
 
-import com.epam.upskill.calculator.exceptionHandler.IllegalArgument;
-import com.epam.upskill.calculator.exceptionHandler.NullArgument;
+import com.epam.upskill.calculator.ErrorCode.ErrorCode;
 import com.epam.upskill.calculator.models.Result;
 import com.epam.upskill.calculator.util.Constants;
 
@@ -9,6 +8,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DivideOperation extends OperationAbstract {
+
+	private final BigDecimal ZERO = new BigDecimal(0);
+
 	/**
 	 * The DivideOperation class extends the OperationAbstract class and provides the implementation
 	 * for performing division operations.
@@ -24,25 +26,36 @@ public class DivideOperation extends OperationAbstract {
 
 	 * The toString method overrides the method from OperationAbstract to return a string
 	 * representation of the division operation, prefixed with "Divide ".
+	 * @return the Result
 	 */
 
-	private final BigDecimal ZERO = new BigDecimal(0);
-	
+
 	@Override
-	public Result perform() throws NullArgument, IllegalArgument {
+	public Result perform() {
 		Result result = operandsValidator();
 		if (!result.getError()) {
 			if(operand2.compareTo(ZERO) == 0) {
 				result.setError(Boolean.TRUE);
 				result.setMessage(Constants.ERROR_MESSAGE_DIVIDE_BY_ZERO);
-				getLogger().error("Can't divide by Zero"); }
+				getLogger().error("Can't divide by Zero");
+				result.setErrorCode(ErrorCode.INVALID_ARGUMENT);
+			}
 			else {
 				result.setResult(operand1.divide(operand2, 10, RoundingMode.CEILING));
 				result.setError(Boolean.FALSE);
-			}}
+				result.setErrorCode(ErrorCode.SUCCESSFUL_OPERATION);
+			}
+		}else {
+			result.setErrorCode(ErrorCode.INVALID_ARGUMENT);
+		}
+
 		return result;
 	}
 
+	/**
+	 *
+	 * @return the operation name
+	 */
 	@Override
 	public String toString() {
 		return super.toString("Divide ");

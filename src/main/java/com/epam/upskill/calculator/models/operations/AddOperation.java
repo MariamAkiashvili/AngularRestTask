@@ -1,6 +1,6 @@
 package com.epam.upskill.calculator.models.operations;
 
-import com.epam.upskill.calculator.exceptionHandler.NullArgument;
+import com.epam.upskill.calculator.ErrorCode.ErrorCode;
 import com.epam.upskill.calculator.models.Result;
 
 public class AddOperation extends OperationAbstract {
@@ -20,18 +20,28 @@ public class AddOperation extends OperationAbstract {
 	 * <p>
 	 * The toString method overrides the method from OperationAbstract to return a string
 	 * representation of the addition operation, prefixed with "Add ".
+	 * @return the result
 	 */
 
 
 	@Override
-	public Result perform() throws NullArgument {
+	public Result perform() {
 		Result result = operandsValidator();
+
 		if (!result.getError()) {
 			result.setResult(operand1.add(operand2));
 			result.setError(Boolean.FALSE);
+			result.setErrorCode(ErrorCode.SUCCESSFUL_OPERATION);
+		}else {
+			result.setErrorCode(ErrorCode.INVALID_ARGUMENT);
 		}
 		return result;
 	}
+
+	/**
+	 *
+	 * @return the operation name
+	 */
 
 	@Override
 	public String toString() {

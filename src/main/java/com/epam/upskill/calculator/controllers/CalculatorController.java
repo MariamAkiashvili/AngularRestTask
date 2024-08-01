@@ -1,7 +1,5 @@
 package com.epam.upskill.calculator.controllers;
 
-import com.epam.upskill.calculator.exceptionHandler.IllegalArgument;
-import com.epam.upskill.calculator.exceptionHandler.NullArgument;
 import com.epam.upskill.calculator.models.Result;
 import com.epam.upskill.calculator.models.operations.MultiplyOperation;
 import com.epam.upskill.calculator.models.operations.OperationInterface;
@@ -28,23 +26,23 @@ public class CalculatorController {
 	private static final Logger logger = LogManager.getLogger(CalculatorController.class);
 
 	@PostMapping("/add")
-	public Result add(@RequestBody AddOperation operation) throws NullArgument {
+	public Result add(@RequestBody AddOperation operation){
 		return this.doOperation(operation);
 	}
 	
 
 	@PostMapping("/subtract")
-	public Result subtract(@RequestBody SubtractOperation operation) throws NullArgument {
+	public Result subtract(@RequestBody SubtractOperation operation){
 		return this.doOperation(operation);
 	}
 
 	@PostMapping("/multiply")
-	public Result multiply(@RequestBody MultiplyOperation operation) throws NullArgument {
+	public Result multiply(@RequestBody MultiplyOperation operation) {
 		return this.doOperation(operation);
 	}
 
 	@PostMapping("/divide")
-	public Result divide(@RequestBody DivideOperation operation) throws NullArgument, IllegalArgument {
+	public Result divide(@RequestBody DivideOperation operation){
 		return this.doOperation(operation);
 	}
 

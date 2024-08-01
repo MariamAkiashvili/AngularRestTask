@@ -1,5 +1,7 @@
 package com.epam.upskill.calculator.models;
 
+import com.epam.upskill.calculator.ErrorCode.ErrorCode;
+
 import java.math.BigDecimal;
 
 public class Result {
@@ -12,17 +14,21 @@ public class Result {
 
 	//The final result of the aritmetic operation
 	private BigDecimal result = null;
-	
+
+	//The final error status code
+	private ErrorCode errorCode;
+
 	//empty constructor
 	public Result() {}
-	
-	public Result(String message, Boolean error, BigDecimal result) {
+
+	public Result(String message, Boolean error, BigDecimal result, ErrorCode errorCode) {
 		super();
 		this.message = message;
 		this.error = error;
 		this.result = result;
+		this.errorCode = errorCode;
 	}
-	
+
 	/**
 	 * @return the message
 	 */
@@ -58,6 +64,23 @@ public class Result {
 	 */
 	public void setResult(BigDecimal result) {
 		this.result = result;
+	}
+
+	/**
+	 *
+	 * @param errorCode error code to set
+	 */
+	public void setErrorCode(ErrorCode errorCode){
+		this.errorCode = errorCode;
+	}
+
+
+	/**
+	 *
+	 * @return the errorCode
+	 */
+	public ErrorCode getErrorCode() {
+		return errorCode;
 	}
 
 	/* (non-Javadoc)
