@@ -25,22 +25,49 @@ public class CalculatorController {
 	
 	private static final Logger logger = LogManager.getLogger(CalculatorController.class);
 
+	/**
+	* Handles the addition operation.
+	*
+	* @param operation describes additional operation
+	* @return the result of the addition operation
+        */
 	@PostMapping("/add")
 	public Result add(@RequestBody AddOperation operation){
 		return this.doOperation(operation);
 	}
 	
 
+	/**
+	* Handles the subtract operation.
+	*
+	* @param operation describes subtract operation
+	* @return the result of the subtract operation
+        */
+	
 	@PostMapping("/subtract")
 	public Result subtract(@RequestBody SubtractOperation operation){
 		return this.doOperation(operation);
 	}
+	
 
+	/**
+	* Handles the multiplying operation.
+	*
+	* @param operation describes multiplying operation
+	* @return the result of the multiplying operation
+        */
 	@PostMapping("/multiply")
 	public Result multiply(@RequestBody MultiplyOperation operation) {
 		return this.doOperation(operation);
 	}
 
+	
+	/**
+	* Handles the divide operation.
+	*
+	* @param operation describes divide operation
+	* @return the result of the divide operation
+        */
 	@PostMapping("/divide")
 	public Result divide(@RequestBody DivideOperation operation){
 		return this.doOperation(operation);
